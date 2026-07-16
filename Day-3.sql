@@ -67,10 +67,61 @@ select p.projectname, d.departmentname from
 projects p right join DEPARTMENTS d
 on p.DEPARTMENTID = d.DEPARTMENTID; 
 
-select p.projectname,e.employeename from 
-emppro ep right join projects p 
-on ep.projectid = p.PROJECTID
-right join emp e 
-on ep.employeeid = e.employeeid;
-
 --FULL JOIN
+select e.employeename, d.departmentname from
+emp e full OUTER join departments d 
+on e.DEPARTMENTID=d.DEPARTMENTID;
+
+select d.departmentname, p.projectname from
+departments d full outer join  projects p
+on d.DEPARTMENTID = p.DEPARTMENTID;
+
+select e.employeename, p.projectname from 
+emp e full outer join emppro ep
+on e.EMPLOYEEID = ep.EMPLOYEEID
+full outer join projects p
+on ep.projectid=p.PROJECTID;
+
+select e.employeename, d.departmentname from 
+emp e full outer join DEPARTMENTS d
+on e.DEPARTMENTID = d.DEPARTMENTID;
+
+select d.departmentname, p.projectname from
+departments d full outer join  projects p
+on d.DEPARTMENTID = p.DEPARTMENTID;
+
+
+--*INTERMEDIATE ASSIGNMENTS*
+--INNER JOIN
+select * from departments;
+select * from emp;
+select * from projects;
+
+select e.employeename from
+emp e inner join departments d
+on e.DEPARTMENTID =  d.departmentid
+where d.DEPARTMENTNAME = 'IT';
+
+select e.EMPLOYEENAME,p.PROJECTNAME from 
+emp e inner join EMPPRO ep
+on e.EMPLOYEEID = ep.EMPLOYEEID
+inner join PROJECTS p
+on p.PROJECTID = ep.PROJECTID
+where p.budget>200000;
+
+select e.employeename,d.departmentname,p.projectname from
+emp e inner join departments d
+on e.DEPARTMENTID = d.DEPARTMENTID
+inner join emppro ep on e.employeeid = ep.EMPLOYEEID
+inner join projects p 
+on ep.projectid = p.projectid;
+
+select d.departmentname, COUNT(e.employeeid) as ttlemp FROM
+departments d inner join emp e
+on d.departmentid = e.DEPARTMENTID
+group by d.departmentname;
+
+select d.departmentname, AVG(e.salary) as AvgSal from
+DEPARTMENTS d inner join emp e
+on d.DEPARTMENTID = e.DEPARTMENTID
+group by d.departmentname;
