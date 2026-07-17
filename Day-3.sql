@@ -151,3 +151,59 @@ select d.departmentname, COUNT(e.employeeid) as TtlEMP
 from departments d left join emp e
 on d.departmentid = e.departmentid
 group by(d.departmentname);
+
+--Right Join
+select * from departments;
+
+select d.departmentname FROM
+emp e right join departments d 
+on d.departmentid = e.departmentid
+where e.DEPARTMENTID is null;
+
+select p.projectname from
+emp e right join emppro ep
+on e.employeeid = ep.EMPLOYEEID
+right join projects p
+on ep.projectid = p.projectid
+where ep.projectid is null;
+
+select d.departmentname, p.projectname from
+projects p right join departments d
+on d.departmentid = p.DEPARTMENTID;
+
+select d.departmentname, count(e.employeeid) as ttlemp
+from emp e right join departments d 
+on e.departmentid = d.departmentid
+group by d.departmentname;
+
+select p.projectname,e.employeename from 
+emp e right join emppro ep
+on e.employeeid = ep.employeeid
+right join projects p
+on ep.projectid = p.projectid;
+
+--*FULL JOIN*
+
+select d.departmentname,e.employeename from
+departments d full outer join emp e
+on d.departmentid = e.departmentid;
+
+select e.employeename from
+emp e full outer join departments d
+on e.departmentid = d.departmentid
+where d.departmentid is null;
+
+select d.departmentname from
+departments d full outer join emp e
+on e.departmentid = d.departmentid
+where e.employeeid is null;
+
+select NVL(e.employeename,'No Employee') as empname, 
+NVL(d.departmentname,'No Dept') as deptname from
+emp e full outer join departments d
+on e.DEPARTMENTID = d.departmentid;
+
+select d.departmentname , p.projectname from
+departments d full outer join projects p
+on d.departmentid = p.departmentid;
+
