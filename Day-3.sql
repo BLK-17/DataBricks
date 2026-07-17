@@ -125,3 +125,29 @@ select d.departmentname, AVG(e.salary) as AvgSal from
 DEPARTMENTS d inner join emp e
 on d.DEPARTMENTID = e.DEPARTMENTID
 group by d.departmentname;
+
+--*LEFT JOIN*
+select e.employeename from 
+emp e left join DEPARTMENTS d
+on e.departmentid = d.DEPARTMENTID
+where d.departmentid is null;
+
+select e.employeename from 
+emp e left join emppro ep
+on e.employeeid = ep.EMPLOYEEID
+where ep.projectid is null;
+
+select d.departmentname from 
+departments d left join emp e
+on d.departmentid = e.DEPARTMENTID
+where e.employeeid is null; 
+
+select p.projectname from 
+PROJECTS p left join departments d
+on p.departmentid = d.DEPARTMENTID
+where d.departmentid is null;
+
+select d.departmentname, COUNT(e.employeeid) as TtlEMP 
+from departments d left join emp e
+on d.departmentid = e.departmentid
+group by(d.departmentname);
